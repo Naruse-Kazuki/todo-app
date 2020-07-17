@@ -1,10 +1,9 @@
 import firebase from '~/plugins/firebase'
 import {
-  firestoreAction,
-  firebaseAction
+  firestoreAction
 } from 'vuexfire'
 
-const db = firebase.firestore();
+const db = firebase.firestore()
 const todosRef = db.collection('todos')
 
 export const state = () => ({
@@ -17,19 +16,19 @@ export const actions = {
   }) => {
     bindFirestoreRef('todos', todosRef)
   }),
-  add: firebaseAction((context, name) => {
+  add: firestoreAction((context, name) => {
     if (name.trim()) {
       todosRef.add({
         name: name,
         done: false,
-        created: firebase.firestore.FialdValue.serverTimestamp()
+        created: firebase.firestore.FieldValue.serverTimestamp()
       })
     }
   }),
   remove: firestoreAction((context, id) => {
     todosRef.doc(id).delete()
   }),
-  toggle: firebaseAction((context, todo) => {
+  toggle: firestoreAction((context, todo) => {
     todosRef.doc(todo.id).update({
       done: !todo.done
     })
