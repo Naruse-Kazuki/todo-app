@@ -45,7 +45,8 @@ export default {
   },
   computed: {
     todos() {
-      return this.$store.state.todos.todos;
+      // return this.$store.state.todos.todos;
+      return this.$store.getters["todos/orderdTodos"];
     }
   },
   filters: {
@@ -59,5 +60,9 @@ export default {
 <style scoped>
 li > span > span.done {
   text-decoration: line-through;
+}
+ul {
+  list-style: none;
+  padding: 0;
 }
 </style>
