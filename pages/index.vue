@@ -21,11 +21,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>テスト</td>
-          <td>2020-04-30 17:00</td>
+        <tr v-for="todo in todos" :key="todo">
+          <td>{{todos.content}}</td>
+          <td>{{todo.created}}</td>
           <td>
-            <button class="button button--yet">作業前</button>
+            <button class="button">{{todo.state}}</button>
           </td>
           <td>
             <button class="button button--delete">削除</button>
@@ -37,7 +37,17 @@
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  data() {
+    return {
+      content: ""
+    };
+  },
+  computed: {
+    ...mapState(["todos"])
+  }
+};
 </script>
 
 <style>
