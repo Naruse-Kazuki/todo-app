@@ -1,20 +1,30 @@
 <template>
-  <v-app>
-    <div>
-      <header></header>
-      <div v-if="!isLogin" class="btn_login">
-        <router-link to="Login" id="login">
-          <v-btn text>ログイン</v-btn>
-        </router-link>
-      </div>
-      <!-- login -->
-      <div v-else class="log_wrap">
-        <v-btn text color="error" class="google_logout" outlined @click="logOut">ログアウト</v-btn>
-        <nuxt-child></nuxt-child>
-      </div>
-      <!-- <button v-if="isLogin">ログアウト</button> -->
+<v-app>
+  <header>
+    <v-app-bar app dark>
+      <v-toolbar-title>Todoリスト</v-toolbar-title>
+      <section>
+        <div v-if="!isLogin" class="btn_login">
+          <router-link to="Login" id="login">
+            <v-btn text>ログイン</v-btn>
+          </router-link>
+        </div>
+        <!-- login -->
+        <div v-else class="log_wrap">
+          <v-btn text color="error" class="google_logout" outlined @click="logOut">ログアウト</v-btn>
+        </div>
+      </section>
+    </v-app-bar>
+  </header>
+  <body>
+    <div v-if="!isLogin" class="btn_login"></div>
+    <!-- login -->
+    <div v-else class="log_wrap">
+      <nuxt-child></nuxt-child>
     </div>
-  </v-app>
+    <!-- <button v-if="isLogin">ログアウト</button> -->
+  </body>
+</v-app>
 </template>
 
 <script>
@@ -80,6 +90,9 @@ export default {
 </script>
 
 <style scoped>
+body {
+  padding-top: 70px;
+}
 #login {
   text-decoration: none;
 }

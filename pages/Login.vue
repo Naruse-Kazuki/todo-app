@@ -47,12 +47,7 @@ export default {
   methods: {
     googleLogin() {
       const provider = new firebase.auth.GoogleAuthProvider();
-      firebase
-        .auth()
-        .signInWithRedirect(provider)
-        .then(user => {
-          this.$router.push("/todos");
-        });
+      firebase.auth().signInWithRedirect(provider);
     },
     logOut() {
       firebase.auth().signOut();

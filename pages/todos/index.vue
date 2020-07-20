@@ -18,16 +18,9 @@
       <div class="form">
         <v-form v-on:submit.prevent="add">
           <v-text-field label="Todoを追加" v-model="name"></v-text-field>
-          <v-btn color="cyan">Add</v-btn>
+          <v-btn color="cyan" id="addBtn">Add</v-btn>
         </v-form>
       </div>
-      <!-- <div>
-      <ul>
-        <li v-for="(post, index) in posts" :key="index">
-          <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
-        </li>
-      </ul>
-      </div>-->
     </div>
   </v-app>
 </template>
@@ -36,16 +29,6 @@
 import moment from "moment";
 
 export default {
-  // async asyncData({ $axios }) {
-  //   // 取得先のURL
-  //   const url = "https://qiita.com/api/v2/items";
-  //   // リクエスト（Get）
-  //   const response = await $axios.$get(url);
-  //   // 配列で返ってくるのでJSONにして返却
-  //   return {
-  //     posts: response
-  //   };
-  // },
   data: function() {
     return {
       name: "",
@@ -95,5 +78,8 @@ ul {
 }
 #todoText {
   margin-right: 10px;
+}
+#addBtn {
+  color: white;
 }
 </style>
