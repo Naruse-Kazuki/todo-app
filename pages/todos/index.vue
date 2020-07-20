@@ -1,28 +1,35 @@
 <template>
-  <div>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <span v-if="todo.created">
-          <input type="checkbox" :checked="todo.done" @change="toggle(todo)" />
-          <span :class="{done: todo.done}">{{todo.name}} {{todo.created.toDate() | dateFilter}}</span>
-          <button @click="remove(todo.id)">delete</button>
-        </span>
-      </li>
-    </ul>
-    <div class="form">
-      <form v-on:submit.prevent="add">
-        <input v-model="name" />
-        <button>Add</button>
-      </form>
-    </div>
-    <!-- <div>
+  <v-app>
+    <div>
+      <ul>
+        <li v-for="todo in todos" :key="todo.id">
+          <span v-if="todo.created" id="todo">
+            <v-checkbox :checked="todo.done" @change="toggle(todo)"></v-checkbox>
+            <span
+              :class="{done: todo.done}"
+              id="todoText"
+            >{{todo.name}} {{todo.created.toDate() | dateFilter}}</span>
+            <v-btn outlined color="red" @click="remove(todo.id)">delete</v-btn>
+          </span>
+        </li>
+      </ul>
+      <br />
+      <hr />
+      <div class="form">
+        <v-form v-on:submit.prevent="add">
+          <v-text-field label="Todoを追加" v-model="name"></v-text-field>
+          <v-btn color="cyan">Add</v-btn>
+        </v-form>
+      </div>
+      <!-- <div>
       <ul>
         <li v-for="(post, index) in posts" :key="index">
           <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
         </li>
       </ul>
-    </div>-->
-  </div>
+      </div>-->
+    </div>
+  </v-app>
 </template>
 
 <script>
@@ -80,5 +87,13 @@ li > span > span.done {
 ul {
   list-style: none;
   padding: 0;
+}
+#todo {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+#todoText {
+  margin-right: 10px;
 }
 </style>

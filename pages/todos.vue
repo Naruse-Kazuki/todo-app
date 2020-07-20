@@ -1,16 +1,20 @@
 <template>
-  <div>
-    <header></header>
-    <div v-if="!isLogin" class="btn_login">
-      <router-link to="Login">ログイン</router-link>
+  <v-app>
+    <div>
+      <header></header>
+      <div v-if="!isLogin" class="btn_login">
+        <router-link to="Login" id="login">
+          <v-btn text>ログイン</v-btn>
+        </router-link>
+      </div>
+      <!-- login -->
+      <div v-else class="log_wrap">
+        <v-btn text color="error" class="google_logout" outlined @click="logOut">ログアウト</v-btn>
+        <nuxt-child></nuxt-child>
+      </div>
+      <!-- <button v-if="isLogin">ログアウト</button> -->
     </div>
-    <!-- login -->
-    <div v-else class="log_wrap">
-      <button class="google_logout" outlined @click="logOut">ログアウト</button>
-      <nuxt-child></nuxt-child>
-    </div>
-    <!-- <button v-if="isLogin">ログアウト</button> -->
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -75,5 +79,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#login {
+  text-decoration: none;
+}
 </style>

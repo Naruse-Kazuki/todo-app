@@ -9,11 +9,11 @@
       <!-- !login -->
       <div class="isLogin_wrap" v-else>
         <div v-if="!isLogin" class="btn_login">
-          <button class="google_login" outlined @click="googleLogin">Googleでログイン</button>
+          <v-btn class="google_login" outlined @click="googleLogin">Googleでログイン</v-btn>
         </div>
         <!-- login -->
         <div v-else class="log_wrap">
-          <button class="google_logout" outlined @click="logOut">ログアウト</button>
+          <v-btn class="google_logout" outlined @click="logOut">ログアウト</v-btn>
         </div>
       </div>
     </header>
