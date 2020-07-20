@@ -15,6 +15,13 @@
         <button>Add</button>
       </form>
     </div>
+    <!-- <div>
+      <ul>
+        <li v-for="(post, index) in posts" :key="index">
+          <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
+        </li>
+      </ul>
+    </div>-->
   </div>
 </template>
 
@@ -22,6 +29,16 @@
 import moment from "moment";
 
 export default {
+  // async asyncData({ $axios }) {
+  //   // 取得先のURL
+  //   const url = "https://qiita.com/api/v2/items";
+  //   // リクエスト（Get）
+  //   const response = await $axios.$get(url);
+  //   // 配列で返ってくるのでJSONにして返却
+  //   return {
+  //     posts: response
+  //   };
+  // },
   data: function() {
     return {
       name: "",
@@ -50,7 +67,7 @@ export default {
   },
   filters: {
     dateFilter(date) {
-      return moment(date).format("YYYY/MM/DD HH:mm:ss");
+      return moment(date).format("YYYY/MM/DD HH:mm");
     }
   }
 };

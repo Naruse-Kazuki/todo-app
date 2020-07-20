@@ -58,7 +58,8 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    "@nuxtjs/axios"
   ],
   /*
    ** Build configuration

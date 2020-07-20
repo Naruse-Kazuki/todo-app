@@ -1,67 +1,79 @@
 <template>
   <div>
-    <ul>
-      <li v-for="todo in todos" :key="todo.id">
-        <span v-if="todo.created">
-          <input type="checkbox" :checked="todo.done" @change="toggle(todo)" />
-          <span :class="{done: todo.done}">{{todo.name}} {{todo.created.toDate() | dateFilter}}</span>
-          <button @click="remove(todo.id)">delete</button>
-        </span>
-      </li>
-    </ul>
-    <div class="form">
-      <form v-on:submit.prevent="add">
-        <input v-model="name" />
-        <button>Add</button>
-      </form>
+    <header></header>
+    <div v-if="!isLogin" class="btn_login">
+      <router-link to="Login">ログイン</router-link>
     </div>
+    <!-- login -->
+    <div v-else class="log_wrap">
+      <button class="google_logout" outlined @click="logOut">ログアウト</button>
+      <nuxt-child></nuxt-child>
+    </div>
+    <!-- <button v-if="isLogin">ログアウト</button> -->
   </div>
 </template>
 
 <script>
-import moment from "moment";
-
+import { mapState } from "vuex";
+import firebase from "@/plugins/firebase";
 export default {
-  data: function() {
+  data() {
     return {
-      name: "",
-      done: false
+      content: ""
     };
   },
-  created: function() {
-    this.$store.dispatch("todos/init");
+  // async mounted() {
+  //   // ログイン済みであれば、ログアウトボタンを表示する
+  //   await auth.onAuthStateChanged(user => (this.isLogin = user ? true : false));
+  // },
+  // methods: {
+  //   async logout() {
+  //     await auth.signOut();
+  //     this.$router.push("/Login");
+  //   }
+  // },
+  computed: {
+    // user() {
+    //   return this.$store.getters["user"];
+    // },
+    ...mapState(["todos"])
+  },
+  asyncData() {
+    return {
+      isWaiting: true,
+      isLogin: false,
+      user: []
+    };
+  },
+  mounted: function() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.isWaiting = false;
+      if (user) {
+        this.isLogin = true;
+        this.user = user;
+        this.$router.push("/todos");
+      } else {
+        this.isLogin = false;
+        this.user = [];
+      }
+    });
   },
   methods: {
-    add() {
-      this.$store.dispatch("todos/add", this.name);
-      this.name = "";
+    googleLogin() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      firebase
+        .auth()
+        .signInWithRedirect(provider)
+        .then(user => {
+          this.$router.push("/todos");
+        });
     },
-    remove(id) {
-      this.$store.dispatch("todos/remove", id);
-    },
-    toggle(todo) {
-      this.$store.dispatch("todos/toggle", todo);
-    }
-  },
-  computed: {
-    todos() {
-      return this.$store.getters["todos/orderdTodos"];
-    }
-  },
-  filters: {
-    dateFilter(date) {
-      return moment(date).format("YYYY/MM/DD HH:mm:ss");
+    logOut() {
+      firebase.auth().signOut();
     }
   }
 };
 </script>
 
-<style scoped>
-li > span > span.done {
-  text-decoration: line-through;
-}
-ul {
-  list-style: none;
-  padding: 0;
-}
+<style>
 </style>
