@@ -1,24 +1,27 @@
 <template>
-  <div class="wrapper">
-    <!-- header -->
-    <header class="header">
-      <!-- Loading -->
-      <div v-if="isWaiting" class="log_wait">
-        <p>読み込み中</p>
-      </div>
-      <!-- !login -->
-      <div class="isLogin_wrap" v-else>
-        <div v-if="!isLogin" class="btn_login">
-          <v-btn class="google_login" outlined @click="googleLogin">Googleでログイン</v-btn>
+  <v-app>
+    <div class="wrapper" id="logPage">
+      <!-- <nuxt-child></nuxt-child> -->
+      <!-- header -->
+      <header class="header">
+        <!-- Loading -->
+        <div v-if="isWaiting" class="log_wait">
+          <p>読み込み中</p>
         </div>
-        <!-- login -->
-        <div v-else class="log_wrap">
-          <v-btn class="google_logout" outlined @click="logOut">ログアウト</v-btn>
+        <!-- !login -->
+        <div class="isLogin_wrap" v-else>
+          <div v-if="!isLogin" class="btn_login">
+            <v-btn class="google_login" outlined @click="googleLogin">Googleでログイン</v-btn>
+          </div>
+          <!-- login -->
+          <div v-else class="log_wrap">
+            <v-btn class="google_logout" outlined @click="logOut">ログアウト</v-btn>
+          </div>
         </div>
-      </div>
-    </header>
-    <!-- body -->
-  </div>
+      </header>
+      <!-- body -->
+    </div>
+  </v-app>
 </template>
 <script>
 import firebase from "@/plugins/firebase";
@@ -55,3 +58,5 @@ export default {
   }
 };
 </script>
+<style scoped>
+</style>
