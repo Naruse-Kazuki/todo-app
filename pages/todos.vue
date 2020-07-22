@@ -1,38 +1,46 @@
 <template>
-  <v-app>
-    <nuxt-child></nuxt-child>
-
-    <div>
-      <ul>
-        <li v-for="todo in todos" :key="todo.id">
-          <span v-if="todo.created" id="todo">
-            <v-checkbox :checked="todo.done" @change="toggle(todo)"></v-checkbox>
-            <span :class="{done: todo.done}" id="todoText">
-              <span id="todoName">{{todo.name}}</span>
-              {{todo.created.toDate() | dateFilter}}
-            </span>
-            <span id="deleteBtn">
-              <v-btn outlined color="red" @click="remove(todo.id)">delete</v-btn>
-            </span>
-          </span>
-        </li>
-      </ul>
-      <br />
-      <hr />
-      <v-form v-on:submit.prevent="add">
-        <v-text-field label="Todoを追加" v-model="name"></v-text-field>
-        <v-btn color="cyan" id="addBtn">Add</v-btn>
-      </v-form>
-    </div>
-    <div v-if="!isLogin" class="btn_login">
-      <router-link to="Login" id="login">
-        <v-btn text>ログイン</v-btn>
-      </router-link>
-    </div>
-    <div v-else class="log_wrap">
-      <v-btn text color="error" class="google_logout" outlined @click="logOut">ログアウト</v-btn>
-    </div>
-  </v-app>
+  <!-- <nuxt-child></nuxt-child> -->
+  <v-main>
+    <v-container v-if="isWaiting" class="log_wait">
+      <p>読み込み中</p>
+    </v-container>
+    <v-container class="isLogin_wrap" v-else>
+      <v-row v-if="!isLogin" class="btn_login" align="center" justify="center">
+        <router-link to="Login" id="login" style="text-decoration: none; color: brack;">
+          <v-btn color="primary">ログインページへ</v-btn>
+        </router-link>
+      </v-row>
+      <v-row v-else class="log_wrap" align="center" justify="center">
+        <v-col>
+          <v-list v-for="todo in todos" :key="todo.id">
+            <v-list-item v-if="todo.created" id="todo">
+              <v-checkbox :checked="todo.done" @change="toggle(todo)"></v-checkbox>
+              <v-list-item-content>
+                <span id="todoName" :class="{done: todo.done}">{{todo.name}}</span>
+                <span
+                  id="todoDate"
+                  :class="{done: todo.done}"
+                >{{todo.created.toDate() | dateFilter}}</span>
+              </v-list-item-content>
+              <span id="deleteBtn">
+                <v-btn outlined color="red" @click="remove(todo.id)">delete</v-btn>
+              </span>
+            </v-list-item>
+          </v-list>
+          <br />
+          <hr />
+          <v-form v-on:submit.prevent="add">
+            <v-text-field label="Todoを追加" v-model="name"></v-text-field>
+            <v-btn color="cyan" id="addBtn">Add</v-btn>
+          </v-form>
+          <br />
+          <v-row align="center" justify="center">
+            <v-btn text color="error" class="google_logout" outlined @click="logOut">ログアウト</v-btn>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-main>
 </template>
 
 <script>
@@ -110,20 +118,9 @@ export default {
 </script>
 
 <style scoped>
-div {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-li > span > span.done {
-  text-decoration: line-through;
-}
-ul {
-  list-style: none;
-  padding: 0;
-}
 #todo {
   display: flex;
-  justify-content: left;
+  /* justify-content: left; */
   align-items: center;
 }
 #todoText {
@@ -134,5 +131,14 @@ ul {
 }
 #todoName {
   font-size: 24px;
+}
+#todoName.done {
+  text-decoration: line-through;
+}
+#todoDate {
+  font-size: 12px;
+}
+#todoDate.done {
+  text-decoration: line-through;
 }
 </style>
