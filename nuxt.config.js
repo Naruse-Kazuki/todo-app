@@ -72,5 +72,8 @@ export default {
         '_': 'lodash'
       })
     ]
+  },
+  generate: {
+    fallback: true
   }
 }
