@@ -1,5 +1,4 @@
 <template>
-  <!-- <nuxt-child></nuxt-child> -->
   <v-main>
     <v-container v-if="isWaiting" class="log_wait">
       <p>読み込み中</p>
@@ -87,7 +86,6 @@ export default {
     todos() {
       return this.$store.getters["todos/orderdTodos"];
     }
-    // ...mapState(["todos"])
   },
   filters: {
     dateFilter(date) {
@@ -120,7 +118,6 @@ export default {
 <style scoped>
 #todo {
   display: flex;
-  /* justify-content: left; */
   align-items: center;
 }
 #todoText {
