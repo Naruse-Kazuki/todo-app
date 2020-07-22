@@ -51,7 +51,7 @@ export default {
       if (user) {
         this.isLogin = true;
         this.user = user;
-        this.$router.push("/todos");
+        this.$router.push("/");
       } else {
         this.isLogin = false;
         this.user = [];
