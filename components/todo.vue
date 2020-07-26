@@ -44,18 +44,11 @@
 </template>
 <script>
 import moment from "moment";
-// import { mapState } from "vuex";
 import firebase from "@/plugins/firebase";
 import { createNamespacedHelpers } from "vuex";
-const {
-  mapState,
-  mapMutations,
-  mapGetters,
-  mapActions
-} = createNamespacedHelpers("todos");
+const { mapGetters, mapActions } = createNamespacedHelpers("todos");
 
 export default {
-  props: ["isWaiting", "isLogin"],
   data: function() {
     return {
       name: "",
@@ -64,20 +57,23 @@ export default {
     };
   },
   created: function() {
-    this.$store.dispatch("todos/init");
+    // this.$store.dispatch("todos/init");
+    this.Init();
   },
   methods: {
-    // ...mapActions("todos", { add: "add" }),
+    ...mapActions(["Init", "Add", "Remove", "Toggle"]),
     add() {
-      // this.add(this.name);
-      this.$store.dispatch("todos/add", this.name);
+      this.Add(this.name);
+      // this.$store.dispatch("todos/add", this.name);
       this.name = "";
     },
     remove(id) {
-      this.$store.dispatch("todos/remove", id);
+      // this.$store.dispatch("todos/remove", id);
+      this.Remove(id);
     },
     toggle(todo) {
-      this.$store.dispatch("todos/toggle", todo);
+      // this.$store.dispatch("todos/toggle", todo);
+      this.Toggle(todo);
     },
     googleLogin() {
       const provider = new firebase.auth.GoogleAuthProvider();
@@ -94,11 +90,11 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters(["todos/orderdTodos"]),
-    ...mapState({ todos: state => state.todos })
-    // todos() {
-    //   // return this.$store.getters["todos/orderdTodos"];
-    // }
+    ...mapGetters(["orderdTodos"]),
+    todos() {
+      // return this.$store.getters["todos/orderdTodos"];
+      return this.orderdTodos;
+    }
   },
   filters: {
     dateFilter(date) {

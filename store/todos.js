@@ -2,6 +2,9 @@ import firebase from '~/plugins/firebase'
 import {
   firestoreAction
 } from 'vuexfire'
+// import {
+//   createNamespacedHelpers
+// } from "vuex";
 
 const db = firebase.firestore()
 const todosRef = db.collection('todos')
@@ -11,12 +14,12 @@ export const state = () => ({
 })
 
 export const actions = {
-  init: firestoreAction(({
+  Init: firestoreAction(({
     bindFirestoreRef
   }) => {
     bindFirestoreRef('todos', todosRef)
   }),
-  add: firestoreAction((context, name) => {
+  Add: firestoreAction((context, name) => {
     if (name.trim()) {
       todosRef.add({
         name: name,
@@ -25,10 +28,10 @@ export const actions = {
       })
     }
   }),
-  remove: firestoreAction((context, id) => {
+  Remove: firestoreAction((context, id) => {
     todosRef.doc(id).delete()
   }),
-  toggle: firestoreAction((context, todo) => {
+  Toggle: firestoreAction((context, todo) => {
     todosRef.doc(todo.id).update({
       done: !todo.done
     })
