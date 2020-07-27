@@ -1,9 +1,3 @@
-// import firebase from 'firebase';
-
-// const config = {
-//   projectId: process.env.FIREBASE_PROJECT_ID
-// }
-
 import firebase from 'firebase'
 
 if (!firebase.apps.length) {
@@ -18,8 +12,3 @@ if (!firebase.apps.length) {
   })
 }
 export default firebase
-
-// if (!firebase.apps.length) {
-//   firebase.initializeApp(config)
-// }
-// export default firebase

@@ -2,9 +2,6 @@ import firebase from '~/plugins/firebase'
 import {
   firestoreAction
 } from 'vuexfire'
-// import {
-//   createNamespacedHelpers
-// } from "vuex";
 
 const db = firebase.firestore()
 const todosRef = db.collection('todos')
