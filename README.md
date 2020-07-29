@@ -3,19 +3,31 @@
 ## Description
 
 Todo app created using Vue.js/Nuxt.js.
+
 You can log in with your Google account to add, delete and check tasks.
+
+<img width="1440" alt="スクリーンショット 2020-07-30 7 13 38" src="https://user-images.githubusercontent.com/53788311/88859351-87ff2880-d234-11ea-885f-662a064a64bf.png">
 
 # Technology selection
 
 Language : JavaScript
+
 Framework : Vue.js + Nuxt.js
+
 Project Creation Tool : create-nuxt-app
+
 UI Framework : Vuetify
+
 Server-side : Firebase
-  Login : Cloud Firestore Authentication
-  Database : Cloud Firestore Database(vuefire)
-  Hosting : Firebase Hosting
+
+- Login : Cloud Firestore Authentication
+  
+- Database : Cloud Firestore Database(vuefire)
+
+- Hosting : Firebase Hosting
+
 Module : Axios
+
 Rendering mode : SPA
 
 ## Build Setup
