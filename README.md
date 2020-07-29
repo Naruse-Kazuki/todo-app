@@ -20,11 +20,11 @@ UI Framework : Vuetify
 
 Server-side : Firebase
 
-  Login : Cloud Firestore Authentication
+- Login : Cloud Firestore Authentication
   
-  Database : Cloud Firestore Database(vuefire)
+- Database : Cloud Firestore Database(vuefire)
 
-  Hosting : Firebase Hosting
+- Hosting : Firebase Hosting
 
 Module : Axios
 
